@@ -1,0 +1,6 @@
+﻿<krpano version="1.19" title="Virtual Tour" debugmode="true" showerrors="true" logkey="true">
+
+	<include url="desktop.xml" if="device.desktop" />
+	<include url="mobile.xml"  if="device.mobile" />
+
+</krpano>

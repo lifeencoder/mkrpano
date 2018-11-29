@@ -1,0 +1,49 @@
+<krpano>
+
+<display movequality10="BEST" stillquality10="BEST" />
+
+<!--
+<layer name="buttons" keep="true" url="%SWFPATH%/plugins/textfield.swf" align="center" width="252" height="50" y="200" 
+background="true" backgroundcolor="0x0F0F0F" backgroundalpha="0.5"
+
+>
+<layer name="line" keep="true" url="%SWFPATH%/plugins/textfield.swf" align="bottom" width="10" height="50" y="0" x="-152"
+background="true" backgroundcolor="0x174B5F" backgroundalpha="0.95"/>
+
+
+<layer name="left" url="vtourskin.png" scale="0.5" align="lefttop" x="10" y="6" crop="0|192|64|64" onovercrop="0|383|64|64" ondowncrop="0|383|64|64" ondown="set(hlookat_moveforce,-1);" onup="buttonglow(null);set(hlookat_moveforce,0);" />
+<layer name="right" url="vtourskin.png" scale="0.5" align="lefttop" x="50" y="6" crop="64|192|64|64" onovercrop="64|383|64|64" ondowncrop="64|383|64|64" ondown="set(hlookat_moveforce,+1);" onup="buttonglow(null);set(hlookat_moveforce,0);" />
+<layer name="up" url="vtourskin.png" scale="0.5" align="lefttop" x="90" y="6" crop="0|256|64|64" onovercrop="0|447|64|64" ondowncrop="0|447|64|64" ondown="set(vlookat_moveforce,-1);" onup="buttonglow(null);set(vlookat_moveforce,0);" />
+<layer name="down" url="vtourskin.png" scale="0.5" align="lefttop" x="130" y="6" crop="64|256|64|64" onovercrop="64|447|64|64" ondowncrop="64|447|64|64" ondown="set(vlookat_moveforce,+1);" onup="buttonglow(null);set(vlookat_moveforce,0);" />
+<layer name="in" url="vtourskin.png" scale="0.5" align="lefttop" x="170" y="6" crop="0|320|64|64" onovercrop="0|511|64|64" ondowncrop="0|511|64|64" ondown="set(fov_moveforce,-1);" onup="buttonglow(null);set(fov_moveforce,0);" />
+<layer name="out" url="vtourskin.png" scale="0.5" align="lefttop" x="210" y="6" crop="64|320|64|64" onovercrop="64|511|64|64" ondowncrop="64|511|64|64" ondown="set(fov_moveforce,+1);" onup="buttonglow(null);set(fov_moveforce,0);" />
+</layer>
+
+<layer name="buttons" width="295" devices="flash">
+<layer name="openfs" url="vtourskin.png" scale="0.5" align="lefttop" x="250" y="6" crop="0|576|64|64" onovercrop="0|646|64|64" ondowncrop="0|646|64|64" onclick="set(fullscreen,true);" visible="true" />
+<layer name="closefs" url="vtourskin.png" scale="0.5" align="lefttop" x="250" y="6" crop="64|576|64|64" onovercrop="64|646|64|64" ondowncrop="64|646|64|64" onclick="set(fullscreen,false);" visible="false" />
+</layer>
+-->
+
+<contextmenu>
+		
+<!--
+		<item name="fs" caption="FULLSCREEN" />
+		<item name="cc" caption="Change Controlmode" onclick="skin_changecontrolmode();"  separator="true" />
+		<item name="nv" caption="Normal View"        onclick="skin_view_normal();"        showif="view.vlookatrange == 180" separator="true"      />
+		<item name="fv" caption="Fisheye View"       onclick="skin_view_fisheye();"       showif="view.vlookatrange == 180" devices="flash|webgl" />
+		<item name="sv" caption="Stereographic View" onclick="skin_view_stereographic();" showif="view.vlookatrange == 180" devices="flash|webgl" />
+		<item name="av" caption="Architectural View" onclick="skin_view_architectural();" showif="view.vlookatrange == 180"                       />
+		<item name="pv" caption="Pannini View"       onclick="skin_view_pannini();"       showif="view.vlookatrange == 180" devices="flash|webgl" />
+		<item name="lp" caption="Little Planet View" onclick="skin_view_littleplanet();"  showif="view.vlookatrange == 180" devices="flash|webgl" />
+-->
+	</contextmenu>
+
+<!--
+<events name="buttonevents" keep="true" devices="flash"
+onenterfullscreen="set(layer[openfs].visible,false); set(layer[closefs].visible,true);"
+onexitfullscreen ="set(layer[openfs].visible,true); set(layer[closefs].visible,false);"
+/>
+-->
+
+</krpano>

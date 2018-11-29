@@ -1,0 +1,56 @@
+Put the compassSM folder in the plugin folder.
+
+Connection:
+<include url= " plugins/compassSM/compassSM.xml" / >
+
+Prescribe 
+
+ <action name=" startup " autorun="onstart">
+ .
+ .
+ set(edit_kompas, true);
+  < / action>
+
+
+Editing mode "C" key" 
+
+We move the scale on the risk in accordance with the direction of light.
+
+From the console insert the number of adjustments "-110" in the OnStart scene.
+Example:
+<scene name=" scene_1"OnStart=" korrect_comp(-110);"...
+
+CompassSM_2 file.xml-ability to edit the background, risks, text, compass button, etc.
+
+When finished, remove the string from name= "startup" :
+
+set(edit_kompas, true);
+-----------------------------------------
+
+Поместить папку "compassSM" в папку "plugin".
+
+Подключение:
+<include url="plugins/compassSM/compassSM.xml" />
+
+Прописать 
+
+ <action name="startup" autorun="onstart">
+	.
+	.
+	  set(edit_compas,true);
+  </action>
+	
+
+Режим редактирования клавиша "С" 
+
+Двигаем шкалу по риске в соответствии с направлением света.
+
+Из консоли вставляем число корректировки "-110" в onstart сцены.
+Пример:
+<scene name="scene_1" onstart="korrect_comp(-110);" ...
+
+Файл compassSM_2.xml - возможность редактировать фон, риски, текст, кнопку компаса и т.д.
+
+По завершении удалить из name="startup" строку:
+
+set(edit_compas,true);
