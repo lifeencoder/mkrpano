@@ -2,6 +2,7 @@
 
 	<!-- krpano 1.19.pr14 - Virtual Tour Skin -->
 
+<display movequality10="BEST" stillquality10="BEST" />
 
 	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
 	<skin_settings maps="false"
