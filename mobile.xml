@@ -632,38 +632,58 @@
             <cube url="panos/DG/DG_Flur.tiles/pano_%s.jpg" />
         </image>
         <hotspot name="DG Zimmer 2_1"
+                 url="skin/hotspotm.png"
                  ath="-89"
                  atv="4"
-                 url="skin/hotspotm.png"
+                 devices="all"
+                 visible="true"
+                 enabled="true"
+                 distorted="false" rx="0.0" ry="0.0" rz="0.0"
                  zorder="99"
                  onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur to DG Zimmer 2 Küche "
+                 url="skin/hotspotml.png"
                  ath="-115"
                  atv="15"
-                 url="skin/hotspotml.png"
+                 devices="all"
+                 visible="true"
+                 enabled="true"
+                 distorted="false" rx="0.0" ry="0.0" rz="0.0"
                  zorder="99"
                  onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="DG_Flur to flur 2"
+                 url="skin/hotspotmr.png"
                  ath="-68"
                  atv="5"
-                 url="skin/hotspotmr.png"
+                 devices="all"
+                 visible="true"
+                 enabled="true"
+                 distorted="false" rx="0.0" ry="0.0" rz="0.0"
                  zorder="99"
                  onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur to Zimmer_1"
+                 url="skin/hotspotm.png"
                  ath="172.20"
                  atv="4.91"
-                 url="skin/hotspotm.png"
+                 devices="all"
+                 visible="true"
+                 enabled="true"
+                 distorted="false" rx="0.0" ry="0.0" rz="0.0"
                  zorder="99"
                  onclick="loadscene(scene_DG_Zimmer_1,null,MERGE,BLEND(1));"
                  >
         </hotspot>
         <hotspot name="Flur to Wc "
+                 url="skin/hotspotm.png"
                  ath="36"
                  atv="12"
-                 url="skin/hotspotm.png"
+                 devices="all"
+                 visible="true"
+                 enabled="true"
+                 distorted="false" rx="0.0" ry="0.0" rz="0.0"
                  zorder="99"
                  onclick="loadscene(scene_DG_W,null,MERGE,BLEND(1));"
                  >
