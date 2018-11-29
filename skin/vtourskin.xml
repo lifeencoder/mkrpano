@@ -63,7 +63,7 @@
 	<display safearea="h-only" />
 
 	<!-- mouse / touch / keyboard(button) control settings - http://krpano.com/docu/xml/#control -->
-	<!-- <control mouse="drag"
+	<control mouse="drag"
 	         touch="drag"
 	         zoomtocursor="false"
 	         zoomoutcursor="false"
@@ -79,7 +79,7 @@
 	         fovspeed="3.0"
 	         fovfriction="0.9"
 	         bouncinglimits="true"
-	         /> -->
+	         />
 
 	<!-- mouse cursors - http://krpano.com/docu/xml/#cursors -->
 	<cursors standard="default"
