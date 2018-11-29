@@ -636,6 +636,7 @@
                 url="skin/hotspotm.png"
                 ath="-89"
                 atv="4"
+                enable="true"
                 edge="center"
                 zoom="true"
                 alpha="1.0"
@@ -646,7 +647,7 @@
                 ath="-115"
                 atv="15"
                 edge="center"
-                zoom="false"
+                enable="true"
                 alpha="1.0"
                 onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1));">
         </hotspot>
@@ -655,7 +656,7 @@
                 ath="-68"
                 atv="5"
                 edge="center"
-                zoom="false"
+                enable="true"
                 alpha="1.0"
                 onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));">
         </hotspot>
@@ -664,7 +665,7 @@
                 ath="172.20"
                 atv="4.91"
                 edge="center"
-                zoom="false"
+                enable="true"
                 alpha="1.0"
                 onclick="loadscene(scene_DG_Zimmer_1,null,MERGE,BLEND(1));"
                  >
@@ -674,7 +675,7 @@
                 ath="36"
                 atv="12"
                 edge="center"
-                zoom="false"
+                enable="true"
                 alpha="1.0"
                 onclick="loadscene(scene_DG_W,null,MERGE,BLEND(1));"
                  >
