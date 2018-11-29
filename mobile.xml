@@ -1,5 +1,5 @@
 ﻿<krpano version="1.19" title="Virtual Tour" debugmode="true" showerrors="true" logkey="true">
-	<include url="skin/vtourskin.xml" />
+	<!-- <include url="skin/vtourskin.xml" /> -->
     <!-- <include url="skin/custom_skin.xml" /> -->
     <include url="plugins/slide_mobile.xml" />
     <!-- <include url="plugins/compassSM/compassSM.xml" /> -->
