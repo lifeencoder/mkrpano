@@ -1,7 +1,7 @@
 ﻿<krpano version="1.19" title="Virtual Tour" debugmode="true" showerrors="true" logkey="true">
 <!--	<include url="skin/vtourskin.xml" />-->
     <include url="skin/custom_skin.xml" />
-    <include url="plugins/slide_desktop.xml" />
+    <include url="plugins/sidemenu_draggable.xml" />
     <include url="plugins/compassSM/compassSM.xml" />
     <include url="plugins/showtext.xml" />
     <include url="plugins/combobox.xml" />
@@ -31,6 +31,7 @@
 <!-- startup action - load the first scene -->
 <action name="startup" autorun="onstart" >
        <!-- showlog(true,top); -->
+    slide_box1_left();    
     Hide_Furnish_hotspot();
     Hide_Dim_hotspot();
     if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
