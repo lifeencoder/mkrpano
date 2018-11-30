@@ -6,6 +6,7 @@
 	               background_y           ="0"
                    
                    m_width       ="480"
+				   m_mobile      ="288"
                    menu_width    ="260"
 	               info_width    ="255"
 	               main_menu_w   ="260"
@@ -295,6 +296,18 @@
     
     
     
+    <action name="slide_box_left">	
+<!--        if(plugin[box1].x , trace(get(x),get(y)); ); -->
+        set(new_x,get(m_x));
+        set(new_x,get(menu_settings.m_mobile));mul(new_x,-1);	tween(plugin[box1].x,get(new_x),0.5,linear,delayedcall(0.1,set(plugin[menu].visible,true);));
+        set(plugin[menu_overlay].visible,false);
+    </action>
+    
+    <action name="slide_box_right">
+    set(new_x,get(m_x));
+	tween(plugin[box1].x,0,0.5,linear,set(plugin[menu].visible,true););
+    set(plugin[menu_overlay].visible,true);    
+    </action>
     
     
     <action name="slide_box1_left">	
