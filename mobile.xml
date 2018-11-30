@@ -1,15 +1,12 @@
 ﻿<krpano version="1.19" title="Virtual Tour" debugmode="true" showerrors="true" logkey="true">
 	<include url="skin/vtourskin.xml" />
-    <!-- <include url="skin/custom_skin.xml" /> -->
-    <include url="plugins/slide_mobile.xml" />
-    <!-- <include url="plugins/compassSM/compassSM.xml" /> -->
+    <include url="plugins/sidemenu_draggable.xml" />
+    <include url="plugins/compassSM/compassSM.xml" />
     <include url="plugins/showtext.xml" />
+    <include url="plugins/combobox.xml" />
     <include url="toolbox/toolbox.xml" />
+    <include url="plugins/webvr.xml" />
     <!-- <include url="panoshot/panoshoot.xml"/> -->
-
-
-
-
 
 <style name="button" type="text"
          css="text-align:center;"
@@ -31,30 +28,17 @@
 
 
 <!-- startup action - load the first scene -->
-<action name="startup" autorun="onstart" >
+<action name="startup" autorun="preinit" devices="mobile" >
        <!-- showlog(true,top); -->
+    slide_box_left();  
+    slide_box1_left();  
+    mul(stagescale,1.0);
     Hide_Furnish_hotspot();
     Hide_Dim_hotspot();
     if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
     loadscene(get(startscene), null, MERGE);
     if(startactions !== null, startactions() );
   </action>
-
-
-<!-- <layer name="Menu_mouseOver"
-           type="text"
-           html =""
-           background="false"
-           css="font-family:Aller; color:#FFFFFF;text-align:center;"
-           align="rightbottom"
-           x="65"
-           y="28"
-           keep="true"
-           handcursor="false"
-             />   -->
-<!--    <autorotate enabled="true" waittime="0.0"  speed="3" horizon="0" tofov="95" />-->
-
-
 
 <layer name="cm" url="skin/menu.png" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="10" rotate="0" state="0" onclick="togglecirclemenu();" />
 <layer name="m1" url="skin/plane.png" html="M1" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true"  zorder="9" alpha="0" onclick="togglecirclemenu(close);slide_box1_right();"  onhover ="set(Layer[Menu_mouseOver].html,Realtime );" onout="set(Layer[Menu_mouseOver].html,);"/>
@@ -64,16 +48,16 @@
 <layer name="m5" url="skin/home.png" html="M5" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu(close);" onhover ="set(Layer[Menu_mouseOver].html,Home" onout="set(Layer[Menu_mouseOver].html,);" />
 <layer name="bg" type="container" align="lefttop" width="100%" height="100%" bgcapture="true" handcursor="false" bgcolor="0x00000" bgalpha="0.5" zorder="8" autoalpha="true" alpha="0.0" onclick="togglecirclemenu(close);"/>
 
-<layer name="q" url="skin/floorp.png" css="text-align:center;font-family:Aller;" width="35" height="35" align="rightbottom" edge="center" x="40" y="80" vcenter="true" bgroundedge="20" keep="true" zorder="10" rotate="0" state="0" onclick="togglecirclemenu2();" />
-<layer name="q8" type="text" html="Eingang" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true"  zorder="9" alpha="0" onclick="togglecirclemenu2(close);floor_f();" />
-<layer name="q7" type="text" html="Flur" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu2(close);floor_f_2();" />
-<layer name="q6" type="text" html="Küche" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu2(close);floor_z_2();" />
-<layer name="q5" type="text" html="Zimmer 1" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu2(close);floor_z_1();" />
-<layer name="q4" type="text" html="Zimmer 2" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu2(close);floor_z_2_1();" />
-<layer name="q3" type="text" html="Zimmer 3" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu2(close);floor_z_3();" />
-<layer name="q2" type="text" html="Bad - Dusche" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu2(close);floor_b();" />
-<layer name="q1" type="text" html="WC" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu2(close);floor_w();" />
-<layer name="qg" type="container" align="lefttop" width="100%" height="100%" bgcapture="true" handcursor="false" bgcolor="0x00000" bgalpha="0.5" zorder="8" autoalpha="true" alpha="0.0" onclick="togglecirclemenu2(close);" />
+<layer name="q" url="skin/floorp.png"  width="35" height="35" align="rightbottom" edge="center" x="40" y="80" vcenter="true" bgroundedge="20" keep="true" zorder="10" rotate="0" state="0" onclick="togglecirclemenu2();" />
+<layer name="q8" type="text" html="Eingang" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="-12" vcenter="true" bgroundedge="20" keep="true"  zorder="9" alpha="1" onclick="togglecirclemenu2(close);floor_f();" />
+<layer name="q7" type="text" html="Flur" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="-12" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="1" onclick="togglecirclemenu2(close);floor_f_2();" />
+<layer name="q6" type="text" html="Küche" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="-12" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="1" onclick="togglecirclemenu2(close);floor_z_2();" />
+<layer name="q5" type="text" html="Zimmer 1" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="-12" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="1" onclick="togglecirclemenu2(close);floor_z_1();" />
+<layer name="q4" type="text" html="Zimmer 2" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="-12" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="1" onclick="togglecirclemenu2(close);floor_z_2_1();" />
+<layer name="q3" type="text" html="Zimmer 3" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="-12" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="1" onclick="togglecirclemenu2(close);floor_z_3();" />
+<layer name="q2" type="text" html="Bad - Dusche" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="-12" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="1" onclick="togglecirclemenu2(close);floor_b();" />
+<layer name="q1" type="text" html="WC" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="-12" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="1" onclick="togglecirclemenu2(close);floor_w();" />
+<layer name="qg" type="container" align="lefttop" width="100%" height="100%" bgcapture="true" handcursor="false" bgcolor="0x00000" bgalpha="0.5" zorder="8" autoalpha="true" alpha="1.0" onclick="togglecirclemenu2(close);" />
 
    <!-- <layer name="Tour_G_Leer"
            type="text"
@@ -133,45 +117,19 @@
         callwith(layer[q8], tween(x|y|alpha,  50|340|0.5, 0.5,default,  ) );
         callwith(layer[qg], set(enabled,true); tween(alpha,1); );    , layer[q].state == 1 OR setstate == 'close',        set(layer[q].state,0);
         callwith(layer[q], tween(rotate, 0));
-        callwith(layer[q1], tween(x|y|alpha|rotate, 40|40|0|0));
-        callwith(layer[q2], tween(x|y|alpha|rotate, 40|40|0|0));
-        callwith(layer[q3], tween(x|y|alpha|rotate, 40|40|0|0));
-        callwith(layer[q4], tween(x|y|alpha|rotate, 40|40|0|0));
-        callwith(layer[q5], tween(x|y|alpha|rotate, 40|40|0|0));
-        callwith(layer[q6], tween(x|y|alpha|rotate, 40|40|0|0));
-        callwith(layer[q7], tween(x|y|alpha|rotate, 40|40|0|0));
-        callwith(layer[q8], tween(x|y|alpha|rotate, 40|40|0|0));
+        callwith(layer[q1], tween(x|y|alpha|rotate, 40|-12|0|0));
+        callwith(layer[q2], tween(x|y|alpha|rotate, 40|-12|0|0));
+        callwith(layer[q3], tween(x|y|alpha|rotate, 40|-12|0|0));
+        callwith(layer[q4], tween(x|y|alpha|rotate, 40|-12|0|0));
+        callwith(layer[q5], tween(x|y|alpha|rotate, 40|-12|0|0));
+        callwith(layer[q6], tween(x|y|alpha|rotate, 40|-12|0|0));
+        callwith(layer[q7], tween(x|y|alpha|rotate, 40|-12|0|0));
+        callwith(layer[q8], tween(x|y|alpha|rotate, 40|-12|0|0));
         callwith(layer[qg], set(enabled,false); tween(alpha,0); );
     );
  
 </action>
 
-
-
-<!-- All Layer For Dg Floor  -->
-
-
-<!-- 
-    <layer name="mylogo"
-           url="gui_menu/visions-viewer-logo.png"
-           align="leftbottom"
-           x="10"
-           y="20"
-           scale="0.7"
-           keep="true"
-           onclick="openurl('https://www.3-visions.com');"
-           /> -->
-
-
-    <!-- <layer name="left attention"
-           url="gui_menu/1.png"
-           align="leftbottom"
-           x="20"
-           y="10"
-           keep="true"
-           handcursor="false"
-           /> -->
-           
 
 <action name="floor_f" scope="local" >
 
@@ -243,11 +201,44 @@
 
 </action> 
 
-    
-            
+<layer name="Menu_mouseOver"
+           type="text"
+           background="false"
+           css="font-family:Aller; color:#FFFFFF;text-align:center;"
+           align="rightbottom"
+           x="65"
+           y="28"
+           keep="true"
+           handcursor="false"
+             />  
+<!--    <autorotate enabled="true" waittime="0.0"  speed="3" horizon="0" tofov="95" />-->
+
+
+
+<!-- All Layer For Dg Floor  -->
+
+    <!-- <layer name="mylogo"
+           url="gui_menu/visions-viewer-logo.png"
+           align="leftbottom"
+           x="10"
+           y="20"
+           scale="0.7"
+           keep="true"
+           onclick="openurl('https://www.3-visions.com');"
+           /> -->
+    <!-- <layer name="left attention"
+           url="gui_menu/1.png"
+           align="leftbottom"
+           x="20"
+           y="10"
+           keep="true"
+           handcursor="false"
+           /> -->
  <!-- Textstyle Label -->
     <textstyle name="Label"
            font="Aller"
+           fontsize.no-mobile="12"
+           fontsize.mobile="30"
            bold="false"
            background="true"
            backgroundcolor="0x7fa1ab"
@@ -267,11 +258,15 @@
 
     <textstyle name="menu_item"
            font="Aller"
+           fontsize.no-mobile="12"
+           fontsize.mobile="30"
            bold="false"
            background="false"
+         
            backgroundalpha="0.667"
            border="false"
            borderwidth="2"
+           
            roundedge="5"
            textcolor="#ffffff"
            padding="6 10"
@@ -287,6 +282,8 @@
             oversampling="8.0"
             mipmapping="true"
             bold="false"
+            fontsize.no-mobile="12"
+            fontsize.mobile="30"
             txtshadow=""
             background="true"
             backgroundcolor="0x7fa1ab"
@@ -329,6 +326,32 @@
            ondown.touch="onover(); asyncloop(pressed, onhover(); );"
            onup.touch="onout();"
            />
+<combobox_design name="default"
+           margin="2"
+           open_close_speed="0.25">
+    <style name="combobox_container_style"
+           bgalpha="0.6"
+           />
+    <style name="combobox_marker_style"
+           css="font-family:Aller;color:#FFFFFF;"
+           bg="false"
+           />
+    <style name="combobox_item_style"
+           css="font-family:Aller; color:#222222;"
+           padding="4 4"
+           bg="false"
+           bgcolor="0xC7E4FC"
+           bgalpha="1.0"
+           />
+</combobox_design>
+
+<!-- <group name="level_0">
+        <group name="object_1" value="    Dimension An" link="loadscene(scene_6_Living_Room_D,null,MERGE|KEEPVIEW,BLEND(0.5))" />
+        <group name="object_2" value="    Dimension Aus" link="loadscene(scene_1_Living_Room,null,MERGE|KEEPVIEW,BLEND(0.5))" />
+        <group name="object_3" value="    Kompass An" link="loadscene(scene_1_Living_Room,null,MERGE|KEEPVIEW,BLEND(0.5))" />
+        <group name="object_4" value="    Kompass Aus" link="loadscene(scene_1_Living_Room,null,MERGE|KEEPVIEW,BLEND(0.5))" />
+    </group> -->
+
 
 <!-- DG Map Layer Container -->
    <layer name="box1"
@@ -342,7 +365,7 @@
            bgcapture="true"
            maskchildren="true"
            handcursor="false"
-           onclick="slide_box1_left();"
+           
            />
 <!-- DG Map Layer -->
  <layer name="map"
@@ -354,167 +377,38 @@
            align="leftcenter"
            scalechildren="true"
            scale="0.3"
+           onclick="slide_box1_left();"
            />
- <!-- <layer name="tour_gallery"
+
+<!-- OG Map Layer Container -->
+
+    <layer name="og"
            type="container"
-           align="bottom"
-           
-           x="0"
-           y="5"
-           width="300"
-           height="100"
-           bgcapture="false"
+           keep="true"
+           visible="false"
+           align="leftcenter"
+           x="-480"
+           y="120"
+           width="520"
+           height="394"
+           bgcapture="true"
            maskchildren="true"
-           scale="0.7"
-           keep="true"
-           ondown=""
-           >
-        <layer name="empty_scene"
-           type="container"
-           bgcolor="0xeeaa49"
-           bgalpha="1.0"
-           bgcapture="false"
-               align="topleft"
-               x="15"
-               y="15"
-               width="25%"
-               height="55%"
-               >
-            <layer name="t_empty_scene"
-                   type="image"
-                   url="skin/empty.png"
-                   width="95%"
-                   height="93%"
-                   align="center"
-                   keep="true"
-                   ondown="g_empty_scene();"
-                   />
-        </layer>
-
-
-
-
-        
-    <layer name="dim_scene"
-           type="container"
-           bgcolor="0x000000"
-           bgalpha="1.0"
-           bgcapture="false"
-               align="top"
-               x="0"
-               y="15"
-               width="25%"
-               height="55%"
-                              >
-    <layer name="t_dim_scene"
-           type="image"
-           url="skin/dimention.png"
-           width="95%"
-           height="93%"
-           align="center"
-           keep="true"
-           ondown="g_dim_scene();"
+           zorder="6"
+           handcursor="false"
            />
-    </layer>
-    <layer name="furnish_scene"
-           type="container"
-           bgcolor="0x000000"
-           bgalpha="1.0"
-           bgcapture="false"
-           align="topright"
-           x="15"
-           y="15"
-           width="25%"
-           height="55%"
-           ondown="g_furnish_scene();" >
-    <layer name="t_furnish_scene"
-                   type="image"
-                   url="skin/furnish.png"
-                   width="95%"
-                   height="93%"
-                   align="center"
-                   keep="true"
-                   ondown="g_furnish_scene();"
-                   />
-    </layer>
-    </layer> -->
+<!-- OG Map Layer -->
 
-
-    <!-- <layer name="Tour_G_Leer"
-           type="text"
-           parent="tour_gallery"
-           css="font-family:Aller;
-                font-size:12px ;
-                color:0xffffff ; "
-           bold="false"
-           background="false"
-           html= "Leer"
-           align="leftbottom"
-           x="35"
-           y="5"
-           keep="true"  />
-    <layer name="Tour_G_Bemaßt"
-           type="text"
-           parent="tour_gallery"
-           css="font-family:Aller;
-                font-size:12px ;
-                color:0xffffff ; "
-           bold="false"
-           background="false"
-           html= "Bemaßt"
-           align="centerbottom"
-           x=""
-           y="5"
-           keep="true"  />
-     <layer name="Tour_G_Möbeliert"
-           type="text"
-           parent="tour_gallery"
-           css="font-family:Aller;
-           font-size:12px ;
-           color:0xffffff ; "
-           bold="false"
-           background="false"
-           html= "Möbliert"
-           align="rightbottom"
-           x="25"
-           y="5"
-           keep="true"  /> -->
-
-    <!-- <layer name="dim_scene"
-           type="image"
-           url="skin/dimention.png"
-           align="leftbottom"
-           x="10"
-           y="20"
+ <layer name="og-map"
+           parent="og"
            keep="true"
-           scale="0.3"
-           bgshadow="xoffset yoffset blur color alpha"
-           ondown="g_dim_scene();"
+           visible="false"
+           url="skin/og-map.png"
+           handcursor="false"
+           capture="false"
+           align="leftbottom"
+           scale="0.5"
+           scalechildren="true"
            />
-    <layer name="furnish_scene"
-           type="image"
-           url="skin/furnish.png"
-           align="leftbottom"
-           x="10"
-           y="80"
-           keep="true"
-           scale="0.3"
-           bgshadow="xoffset yoffset blur color alpha"
-           ondown="g_furnish_scene();"
-           />
-
-    <layer name="empty_scene"
-           type="image"
-           url="skin/empty.png"
-           align="leftbottom"
-           x="10"
-           y="140"
-           keep="true"
-           scale="0.3"
-           bgshadow="xoffset yoffset blur color alpha"
-           ondown="g_empty_scene();"
-           />            -->
-
 
    <layer name="project_info"
            type="container"
@@ -522,7 +416,7 @@
            alpha="1"
            align="righttop"
            x="-255"
-           y="48"
+           y="0"
            width="284"
            height="240"
            bgcapture="true"
@@ -531,6 +425,20 @@
            zorder="88"
            handcursor="false"
            />
+
+
+<!-- <<< Main Combo Box Layer >>>================================================================================ -->           
+
+
+
+<!-- <<< OG Floor Combo Box >>>================================================================================ -->           
+
+
+
+<!-- <<< DG Floor Combo Box >>>================================================================================ -->    
+
+
+<!-- <<< OG Floor Info Box >>>================================================================================ -->
 
 <!-- <<< DG Floor Info Box >>>================================================================================ -->
 
@@ -559,29 +467,58 @@
            handcursor="true"
            onclick="slide_project_info_right();"
            />
-<!-- 
-    <plugin name="menu"
+
+<!-- <<< Right Top Menu Information Label >>>================================================================================ -->    
+
+
+
+<!-- <<< Right Top Menu Grundriss Label >>>================================================================================ -->              
+
+    <!-- <plugin name="menu"
             url="gui_menu/btn_menu_g.png"
             keep="true"
-            x="288"
-            y="167"
+            x="479"
+            y="16"
             visible="true"
             parent="box1"
             zorder="1"
-            scale ="0.8"
-            onclick="slide_box1_right();"
+            onclick="slide_box_right();"
             />
     <plugin name="menu_overlay"
             url="gui_menu/btn_menu.png"
             keep="true"
-            x="288"
-            y="167"
+            x="479"
+            y="16"
             visible="false"
             parent="box1"
             zorder="1"
-            scale ="0.8"
-            onclick="slide_box1_left();"
+            onclick="slide_box_left();"
             /> -->
+
+<!-- <<< Right Top OG Menu Grundriss Label >>>================================================================================ --> 
+
+    <plugin name="og-gru"
+            url="gui_menu/btn_menu_g.png"
+            parent="og"
+            keep="true"
+            visible="true"
+            x="479"
+            y="16"
+            zorder="2"
+            onclick="slide_og_right();"
+            />
+
+
+    <plugin name="og_gru_overlay"
+            url="gui_menu/btn_menu.png"
+            parent="og"
+            keep="true"
+            visible="false"
+            x="479"
+            y="16"
+            zorder="2"
+            onclick="slide_og_left();"
+            />
 
 
 <!--
@@ -601,12 +538,46 @@
 -->
 
 
+  <action name="og_change">
+
+           set(layer[box1].visible,false);
+           set(layer[map].visible,false);
+           set(layer[menu].visible,false);
+           set(layer[menu_overlay].visible,false);
+
+           set(layer[og].visible,true);
+           set(layer[og-map].visible,true);
+           set(layer[og-gru].visible,true);
+           set(layer[dg_info].visible,false);
+           set(layer[og_info].visible,true);
+           loadscene(scene_OG_Flur,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));
+  </action>
+
+  <action name="dg_change">
+
+           set(layer[box1].visible,true);
+           set(layer[map].visible,true);
+           set(layer[menu].visible,true);
+           set(layer[menu_overlay].visible,false);
+
+           set(layer[og].visible,false);
+           set(layer[og-map].visible,false);
+           set(layer[og-gru].visible,false);
+           set(layer[og_info].visible,false);
+           set(layer[dg_info].visible,true);
+           
+
+           loadscene(scene_DG_Flur,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));
+  </action>
+
+
+
 <action name="remove_all_hotspotsr">
           set(layer[tour_gallery].visible,false);
           set(layer[DG_Scene_Name].visible,false);
           set(layer[project_info].visible,false);
           set(layer[box1].visible,false);
-          <!-- set(layer[combo_box].visible,false); -->
+          set(layer[combo_box].visible,false);
           set(layer[adc].visible,false);
           set(layer[main_menu].visible,false);
           for(set(i,0), i LT hotspot.count, inc(i),
@@ -616,14 +587,16 @@
 
 
 
+
 <!--      onclick="loadpano('%SWFPATH%/krpano_2.xml', null, MERGE, BLEND(2));" -->
+
 
 
     <!-- ................................................................................   -->
     <!-- SCENE EMPTY -->
     <!-- ................................................................................   -->
- <scene name="scene_DG_Flur" title="DG_Flur" state ="0" onstart="updateradar();">
-        <action name="updateradar">
+ <scene name="scene_DG_Flur" title="DG_Flur" state="0" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Flur); set(layer[radar].heading, 00.00 );set(Layer[DG_Scene_Name].html,Flur - Eingang);
         </action>
         <view hlookat="-70.0" vlookat="-1.0" fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
@@ -632,40 +605,45 @@
             <cube url="panos/DG/DG_Flur.tiles/pano_%s.jpg" />
         </image>
         <hotspot name="DG Zimmer 2_1"
-                url="skin/hotspotm.png"
-                width="35" height="35"  edge="center"  vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0"
-                ath="-89.0"
-                atv="4.0"
-                onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1));">
+                 ath="-89"
+                 atv="4"
+                 url="skin/hotspotm.png"
+                 onhover="showtext( Zimmer 2 , Label) ;"
+                 
+                 onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur to DG Zimmer 2 Küche "
-                url="skin/hotspotml.png"
-                width="35" height="35"  edge="center"  vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0"                
-                ath="-115.0"
-                atv="15.0"
-                onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1));">
+                 ath="-115"
+                 atv="15"
+                 url="skin/hotspotml.png"
+                 onhover="showtext( Küche - Zimmer 2 , Label) ;"
+                 
+                 onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="DG_Flur to flur 2"
-                url="skin/hotspotmr.png"
-                width="35" height="35"  edge="center"  vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0"
-                ath="-68"
-                atv="5.0"
-                onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));">
+                 ath="-68"
+                 atv="5"
+                 url="skin/hotspotmr.png"
+                 onhover="showtext( Flur - Bad - Zimmer 3 ,Label) ;"
+                
+                 onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur to Zimmer_1"
-                url="skin/hotspotm.png"
-                width="35" height="35"  edge="center"  vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0"                
-                ath="172.20"
-                atv="4.91"
-                onclick="loadscene(scene_DG_Zimmer_1,null,MERGE,BLEND(1));"
+                 ath="172.20"
+                 atv="4.91"
+                 url="skin/hotspotm.png"
+                 onhover="showtext( Zimmer_1,Label) ;"
+                 
+                 onclick="loadscene(scene_DG_Zimmer_1,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
         <hotspot name="Flur to Wc "
-                url="skin/hotspotm.png"
-                width="35" height="35"  edge="center"  vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0"                
-                ath="36.0"
-                atv="12.0"
-                onclick="loadscene(scene_DG_W,null,MERGE,BLEND(1));"
+                 ath="36"
+                 atv="12"
+                 url="skin/hotspotm.png"
+                 onhover="showtext( WC ,Label) ;"
+                 
+                 onclick="loadscene(scene_DG_W,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
     </scene>
@@ -674,9 +652,9 @@
     <!--   scene_DG_Flur_2_empty  -->
     <!-- ................................................................................   -->
 
-<scene name="scene_DG_Flur_2" title="DG_Flur_2" state ="0" onstart="updateradar();">
+<scene name="scene_DG_Flur_2" title="DG_Flur_2" state="0" onstart="updateradar();">
 
-        <action name="updateradar">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Flur_2); set(layer[radar].heading, 00.00 );set(Layer[DG_Scene_Name].html,Flur - Bad - Zimmer 3);
         </action>
         <view hlookat="0" vlookat="0" fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
@@ -688,6 +666,7 @@
                  ath="140"
                  atv="5"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Eingang,Label) ;"
                  
                  onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));">
         </hotspot>
@@ -695,13 +674,15 @@
                  ath="-135"
                  atv="22"
                  url="skin/hotspotmr.png"
-                 
+                 onhover="showtext(Zimmer 2,Label) ;"
+                
                  onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur 2 to Bad"
                  ath="98"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Bad - Dusche,Label) ;"
                  
                  onclick="loadscene(scene_DG_Bad,null,MERGE,BLEND(1));">
         </hotspot>
@@ -709,6 +690,7 @@
                  ath="-164"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Küche - Zimmer 2,Label) ;"
                  
                  onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1));">
         </hotspot>
@@ -716,6 +698,7 @@
                  ath="-45"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Zimmer 3,Label) ;"
                  
                  onclick="loadscene(scene_DG_Zimmer_3,null,MERGE,BLEND(1));">
         </hotspot>
@@ -726,8 +709,8 @@
     <!--   scene_DG_Zimmer_2 Küche_Empty  -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_2" title="DG_Zimmer_2" state ="0" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Zimmer_2" title="DG_Zimmer_2" state="0" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_2); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,Küche - Zimmer 2);
         </action>
@@ -740,22 +723,25 @@
                  ath="23"
                  atv="8"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Bad - Zimmer 3,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur "
                  ath="81"
                  atv="11"
                  url="skin/hotspotmr.png"
-                 
-                 onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));adjusthlookat(30,30);">
+                 onhover="showtext( Flur - Eingang ,Label) ;"
+                
+                 onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1))lookto(0, 0, 0, smooth(0,0,0))adjusthlookat(30,30);">
         </hotspot>
         <hotspot name="DG Zimmer 2"
                  ath="-40"
                  atv="18"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Zimmer 2,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
     </scene>
 
@@ -763,8 +749,8 @@
     <!--   scene_DG_Zimmer_2_1_Empty  -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_2_1" title="DG_Zimmer_2_1" state ="0" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Zimmer_2_1" title="DG_Zimmer_2_1" state="0" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_2_1); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,Zimmer 2);
         </action>
@@ -777,23 +763,27 @@
                  ath="90"
                  atv="6"
                  url="skin/hotspotm.png"
-                 onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));"
+                 onhover="showtext( Flur - Eingang ,Label) ;"
+                 
+                 onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
         <hotspot name="Zimmer 2 to Flur Bad "
                  ath="72"
                  atv="6"
                  url="skin/hotspotml.png"
+                 onhover="showtext( Flur - Bad - Zimmer 3,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
         <hotspot name="Zimmer 2_1 to DG Zimmer 2 Küche "
                  ath="108"
                  atv="8"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Küche - Zimmer 2 ,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
     </scene>
@@ -802,8 +792,8 @@
     <!--   scene_DG_Bad_Empty   -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Bad" title="DG_Bad" state ="0" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Bad" title="DG_Bad" state="0" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Bad); set(layer[radar].heading, 00.00);set(Layer[DG_Scene_Name].html,Bad - Dusche);
         </action>
         <view hlookat="112" vlookat="21" fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto"/>
@@ -815,7 +805,8 @@
                  ath="-150"
                  atv="12"
                  url="skin/hotspotmr.png"
-                 
+                 onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
+                
                  onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));">
         </hotspot>
     </scene>
@@ -824,8 +815,8 @@
     <!--   scene_DG_W_Empty  -->
     <!-- ................................................................................   -->
 
-     <scene name="scene_DG_W" title="DG_W" state ="0" onstart="updateradar();">
-        <action name="updateradar">
+     <scene name="scene_DG_W" title="DG_W" state="0" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_W ); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,WC);
         </action>
@@ -838,6 +829,7 @@
                  ath="-159"
                  atv="32"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur-Eingang ,Label) ;"
                  
                  onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));">
         </hotspot>
@@ -847,8 +839,8 @@
     <!--   scene_DG_Zimmer_1_Empty  -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_1" title="DG_Zimmer_1" state ="0" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Zimmer_1" title="DG_Zimmer_1" state="0" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_1 ); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,Zimmer_1);
         </action>
@@ -861,6 +853,7 @@
                  ath="0"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Eingang,Label) ;"
                  
                  onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));">
 
@@ -871,8 +864,8 @@
     <!--   scene_DG_Zimmer_3_Empty  -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_3" title="DG_Zimmer_3" state ="0" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Zimmer_3" title="DG_Zimmer_3" state="0" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_3); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,Zimmer 3);
         </action>
@@ -885,8 +878,9 @@
                  ath="126"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1)));">
+                 onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
     </scene>
 
@@ -894,8 +888,8 @@
     <!-- SCENE DIMENTION -->
     <!-- ................................................................................   -->
 
- <scene name="scene_DG_Flur_D" title="DG_Flur_D" state ="1" onstart="updateradar();">
-        <action name="updateradar">
+ <scene name="scene_DG_Flur_D" title="DG_Flur_D" state="1" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Flur_D); set(layer[radar].heading, 00.00 );set(Layer[DG_Scene_Name].html,Flur - Eingang);
         </action>
         <view hlookat="-70.0" vlookat="-1.0" fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
@@ -907,37 +901,42 @@
                  ath="-89"
                  atv="4"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Zimmer 2 , Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur to DG Zimmer 2 Küche "
                  ath="-115"
                  atv="15"
                  url="skin/hotspotml.png"
+                 onhover="showtext( Küche - Zimmer 2 , Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="DG_Flur to flur 2"
                  ath="-68"
                  atv="5"
                  url="skin/hotspotmr.png"
-                 
+                 onhover="showtext( Flur - Bad - Zimmer 3 ,Label) ;"
+                
                  onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur to Zimmer_1"
                  ath="172.20"
                  atv="4.91"
                  url="skin/hotspotm.png"
-                  
-                 onclick="loadscene(scene_DG_Zimmer_1_D,null,MERGE,BLEND(1));"
+                 onhover="showtext( Zimmer_1,Label) ;"
+                 
+                 onclick="loadscene(scene_DG_Zimmer_1_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
         <hotspot name="Flur to Wc "
                  ath="36"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext( WC ,Label) ;"
                  
-                 onclick="loadscene(scene_DG_W_D,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_W_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
     </scene>
@@ -946,8 +945,8 @@
     <!--   scene_DG_Flur_2_DIMENTION  -->
     <!-- ................................................................................   -->
 
-<scene name="scene_DG_Flur_2_D" title="DG_Flur_2_D" state ="1" onstart="updateradar();">
-        <action name="updateradar">
+<scene name="scene_DG_Flur_2_D" title="DG_Flur_2_D" state="1" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Flur_2_D); set(layer[radar].heading, 00.00 );set(Layer[DG_Scene_Name].html,Flur - Bad - Zimmer 3);
         </action>
         <view hlookat="0" vlookat="0" fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
@@ -959,6 +958,7 @@
                  ath="140"
                  atv="5"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Eingang,Label) ;"
                  
                  onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1));">
         </hotspot>
@@ -966,13 +966,15 @@
                  ath="-135"
                  atv="22"
                  url="skin/hotspotmr.png"
-                 
+                 onhover="showtext(Zimmer 2,Label) ;"
+                
                  onclick="loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur 2 to Bad"
                  ath="98"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Bad - Dusche,Label) ;"
                  
                  onclick="loadscene(scene_DG_Bad_D,null,MERGE,BLEND(1));">
         </hotspot>
@@ -980,6 +982,7 @@
                  ath="-164"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Küche - Zimmer 2,Label) ;"
                  
                  onclick="loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1));">
         </hotspot>
@@ -987,6 +990,7 @@
                  ath="-45"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Zimmer 3,Label) ;"
                  
                  onclick="loadscene(scene_DG_Zimmer_3_D,null,MERGE,BLEND(1));">
         </hotspot>
@@ -995,8 +999,8 @@
     <!--   scene_DG_Zimmer_2 Küche_DIMENTION  -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_2_D" title="DG_Zimmer_2_D" state ="1" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Zimmer_2_D" title="DG_Zimmer_2_D" state="1" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_2_D); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,Küche - Zimmer 2);
         </action>
@@ -1009,23 +1013,26 @@
                  ath="23"
                  atv="8"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Bad - Zimmer 3,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
 
         </hotspot>
         <hotspot name="Flur "
                  ath="81"
                  atv="11"
                  url="skin/hotspotmr.png"
-                 
-                 onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1));adjusthlookat(30,30);">
+                 onhover="showtext( Flur - Eingang ,Label) ;"
+                
+                 onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1))lookto(0, 0, 0, smooth(0,0,0))adjusthlookat(30,30);">
         </hotspot>
         <hotspot name="DG Zimmer 2"
                  ath="-40"
                  atv="18"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Zimmer 2,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
     </scene>
 
@@ -1033,8 +1040,8 @@
     <!--   scene_DG_Zimmer_2_1_DIMENTION  -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_2_1_D" title="DG_Zimmer_2_1_D" state ="1" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Zimmer_2_1_D" title="DG_Zimmer_2_1_D" state="1" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_2_1_D); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,Zimmer 2);
         </action>
@@ -1047,8 +1054,9 @@
                  ath="90"
                  atv="6"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Flur - Eingang ,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
 
@@ -1056,16 +1064,18 @@
                  ath="72"
                  atv="6"
                  url="skin/hotspotml.png"
+                 onhover="showtext( Flur - Bad - Zimmer 3,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
         <hotspot name="Zimmer 2_1 to DG Zimmer 2 Küche "
                  ath="108"
                  atv="8"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Küche - Zimmer 2 ,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
     </scene>
@@ -1074,8 +1084,8 @@
     <!--   scene_DG_Bad_DIMENTION   -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Bad_D" title="DG_Bad_D" state ="1" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Bad_D" title="DG_Bad_D" state="1" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Bad_D); set(layer[radar].heading, 00.00);set(Layer[DG_Scene_Name].html,Bad - Dusche);
         </action>
         <view hlookat="112" vlookat="21" fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
@@ -1087,7 +1097,8 @@
                  ath="-150"
                  atv="12"
                  url="skin/hotspotmr.png"
-                 
+                 onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
+                
                  onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1));">
         </hotspot>
 
@@ -1097,8 +1108,8 @@
     <!--   scene_DG_W_DIMENTION  -->
     <!-- ................................................................................   -->
 
-     <scene name="scene_DG_W_D" title="DG_W_D" state ="1" onstart="updateradar();">
-        <action name="updateradar">
+     <scene name="scene_DG_W_D" title="DG_W_D" state="1" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_W_D ); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,WC);
         </action>
@@ -1111,6 +1122,7 @@
                  ath="-159"
                  atv="32"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur-Eingang ,Label) ;"
                  
                  onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1));">
 
@@ -1121,8 +1133,8 @@
     <!--   scene_DG_Zimmer_1_DIMENTION  -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_1_D" title="DG_Zimmer_1_D" state ="1" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Zimmer_1_D" title="DG_Zimmer_1_D" state="1" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_1_D ); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,Zimmer_1);
         </action>
@@ -1135,6 +1147,7 @@
                  ath="0"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Eingang,Label) ;"
                  
                  onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1));">
 
@@ -1145,8 +1158,8 @@
     <!--   scene_DG_Zimmer_3_DIMENTION  -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_3_D" title="DG_Zimmer_3_D" state ="1" onstart="updateradar();">
-        <action name="updateradar">
+    <scene name="scene_DG_Zimmer_3_D" title="DG_Zimmer_3_D" state="1" onstart="updateradar();">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_3_D); set(layer[radar].heading,00.00);
             set(Layer[DG_Scene_Name].html,Zimmer 3);
         </action>
@@ -1159,8 +1172,9 @@
                  ath="126"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1)));">
+                 onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
     </scene>
 
@@ -1172,7 +1186,7 @@
     <!-- DG SCENE FURNISH scene_DG_Flur_F -->
     <!-- ................................................................................   -->
 
-	<scene name="scene_DG_Flur_F" title="DG_Flur_F"  state = "2" onstart="updateradar();" thumburl="panos/DG/DG_Flur_F.tiles/thumb.jpg" lat="" lng="" heading="">
+	<scene name="scene_DG_Flur_F" title="DG_Flur_F" state="2" onstart="updateradar();" thumburl="panos/DG/DG_Flur_F.tiles/thumb.jpg" lat="" lng="" heading="">
 
 		 <view hlookat="-70.0" vlookat="-1.0" fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
 
@@ -1181,44 +1195,49 @@
 		<image>
 			<cube url="panos/DG/DG_Flur_F.tiles/pano_%s.jpg" />
 		</image>
-        <action name="updateradar">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Flur_F); set(layer[radar].heading, 00.00 );set(Layer[DG_Scene_Name].html,Flur - Eingang);
         </action>
         <hotspot name="DG Zimmer 2_1"
                  ath="-89"
                  atv="4"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Zimmer 2 , Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur to DG Zimmer 2 Küche "
                  ath="-115"
                  atv="15"
                  url="skin/hotspotml.png"
+                 onhover="showtext( Küche - Zimmer 2 , Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="DG_Flur to flur 2"
                  ath="-68"
                  atv="5"
                  url="skin/hotspotmr.png"
-                 
+                 onhover="showtext( Flur - Bad - Zimmer 3 ,Label) ;"
+                
                  onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur to Zimmer_1"
                  ath="172.20"
                  atv="4.91"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Zimmer_1,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_1_F,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_Zimmer_1_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
         <hotspot name="Flur to Wc "
                  ath="36"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext( WC ,Label) ;"
                  
-                 onclick="loadscene(scene_DG_W_F,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_W_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
 	</scene>
@@ -1227,13 +1246,13 @@
     <!-- DG SCENE FURNISH scene_DG_Flur_2_F -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Flur_2_F" title="DG_Flur_2_F" state = "2" onstart="updateradar();"   thumburl="panos/DG/DG_Flur_2_F.tiles/thumb.jpg" lat="" lng="" heading="">
+    <scene name="scene_DG_Flur_2_F" title="DG_Flur_2_F" state="2" onstart="updateradar();"   thumburl="panos/DG/DG_Flur_2_F.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0"  fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
 		<preview url="panos/DG/DG_Flur_2_F.tiles/preview.jpg" />
 		<image>
 			<cube url="panos/DG/DG_Flur_2_F.tiles/pano_%s.jpg" />
 		</image>
-          <action name="updateradar">
+          <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Flur_2_F); set(layer[radar].heading, 00.00 );
             set(Layer[DG_Scene_Name].html,Flur - Bad - Zimmer 3);
         </action>
@@ -1241,6 +1260,7 @@
                  ath="140"
                  atv="5"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Eingang,Label) ;"
                  
                  onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1));">
         </hotspot>
@@ -1248,13 +1268,15 @@
                  ath="-135"
                  atv="22"
                  url="skin/hotspotmr.png"
-                 
+                 onhover="showtext(Zimmer 2,Label) ;"
+                
                  onclick="loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur 2 to Bad-Dusche"
                  ath="98"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Bad - Dusche,Label) ;"
                  
                  onclick="loadscene(scene_DG_Bad_F,null,MERGE,BLEND(1));">
         </hotspot>
@@ -1262,6 +1284,7 @@
                  ath="-164"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Küche - Zimmer 2,Label) ;"
                  
                  onclick="loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1));">
         </hotspot>
@@ -1269,6 +1292,8 @@
                  ath="-45"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Zimmer 3,Label) ;"
+                 
                  onclick="loadscene(scene_DG_Zimmer_3_F,null,MERGE,BLEND(1));">
         </hotspot>
 	</scene>
@@ -1276,14 +1301,14 @@
     <!-- DG SCENE FURNISH scene_DG_Zimmer_2_1_F" -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_2_1_F" title="DG_Zimmer_2_1_F" state = "2" onstart="updateradar();" thumburl="panos/DG/DG_Zimmer_2_1_F.tiles/thumb.jpg" lat="" lng="" heading="">
+    <scene name="scene_DG_Zimmer_2_1_F" title="DG_Zimmer_2_1_F" state="2" onstart="updateradar();" thumburl="panos/DG/DG_Zimmer_2_1_F.tiles/thumb.jpg" lat="" lng="" heading="">
 
 		<view hlookat="-66" vlookat="0" fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
 		<preview url="panos/DG/DG_Zimmer_2_1_F.tiles/preview.jpg" />
 		<image>
 			<cube url="panos/DG/DG_Zimmer_2_1_F.tiles/pano_%s.jpg" />
 		</image>
-        <action name="updateradar">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_2_1_F); set(layer[radar].heading, 00.00 );
             set(Layer[DG_Scene_Name].html,Zimmer 2);
         </action>
@@ -1291,7 +1316,8 @@
                  ath="71"
                  atv="53"
                  url="gui_menu/hotspot_normal.png"
-                 
+                 onover="set(url,gui_menu/hotspot_glow.png);"
+                 onout="set(url,gui_menu/hotspot_normal.png);"
                  onclick="openurl('https://www.3-visions.com',  _blank)">
             />
         </hotspot>
@@ -1299,24 +1325,27 @@
                  ath="90"
                  atv="6"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Flur - Eingang ,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
         <hotspot name="Zimmer 2 to Flur Bad "
                  ath="72"
                  atv="6"
                  url="skin/hotspotml.png"
+                 onhover="showtext( Flur - Bad - Zimmer 3,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
         <hotspot name="Zimmer 2_1 to DG Zimmer 2 Küche "
                  ath="108"
                  atv="8"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Küche - Zimmer 2 ,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1));"
+                 onclick="loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
 	</scene>
@@ -1325,13 +1354,13 @@
     <!-- DG SCENE FURNISH scene_DG_Zimmer_2_F -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_2_F" title="DG_Zimmer_2_F" state = "2" onstart="updateradar();" thumburl="panos/DG/DG_Zimmer_2_F.tiles/thumb.jpg" lat="" lng="" heading="">
+    <scene name="scene_DG_Zimmer_2_F" title="DG_Zimmer_2_F" state="2" onstart="updateradar();" thumburl="panos/DG/DG_Zimmer_2_F.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="130" vlookat="0.0"  fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto"  />
 		<preview url="panos/DG/DG_Zimmer_2_F.tiles/preview.jpg" />
 		<image>
 			<cube url="panos/DG/DG_Zimmer_2_F.tiles/pano_%s.jpg" />
 		</image>
-        <action name="updateradar">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_2_F); set(layer[radar].heading, 00.00 );
             set(Layer[DG_Scene_Name].html,Küche - Zimmer 2);
         </action>
@@ -1339,22 +1368,25 @@
                  ath="23"
                  atv="8"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Bad - Zimmer 3,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur "
                  ath="81"
                  atv="11"
                  url="skin/hotspotmr.png"
-                 
-                 onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));">
+                 onhover="showtext( Flur - Eingang ,Label) ;"
+                
+                 onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="DG Zimmer 2"
                  ath="-40"
                  atv="18"
                  url="skin/hotspotm.png"
+                 onhover="showtext( Zimmer 2,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
 	</scene>
 
@@ -1362,13 +1394,13 @@
     <!-- DG SCENE FURNISH scene_DG_Zimmer_1_F" -->
     <!-- ................................................................................   -->
 
-     <scene name="scene_DG_Zimmer_1_F" title="DG_Zimmer_1_F" state = "2" onstart="updateradar();" thumburl="panos/DG/DG_Zimmer_1_F.tiles/thumb.jpg" lat="" lng="" heading="">
+     <scene name="scene_DG_Zimmer_1_F" title="DG_Zimmer_1_F" state="2" onstart="updateradar();" thumburl="panos/DG/DG_Zimmer_1_F.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="133.0" vlookat="1.7"  fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
 		<preview url="panos/DG/DG_Zimmer_1_F.tiles/preview.jpg" />
 		<image>
 			<cube url="panos/DG/DG_Zimmer_1_F.tiles/pano_%s.jpg" />
 		</image>
-         <action name="updateradar">
+         <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_1_F); set(layer[radar].heading, 00.00 );
             set(Layer[DG_Scene_Name].html,Zimmer_1);
         </action>
@@ -1376,6 +1408,7 @@
                  ath="0"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Eingang,Label) ;"
                  
                  onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1));">
         </hotspot>
@@ -1385,13 +1418,13 @@
     <!-- DG SCENE FURNISH scene_DG_Zimmer_3_F -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Zimmer_3_F" title="DG_Zimmer_3_F" state = "2" onstart="updateradar();" thumburl="panos/DG/DG_Zimmer_3_F.tiles/thumb.jpg" lat="" lng="" heading="">
+    <scene name="scene_DG_Zimmer_3_F" title="DG_Zimmer_3_F" state="2" onstart="updateradar();" thumburl="panos/DG/DG_Zimmer_3_F.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0"  fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
 		<preview url="panos/DG/DG_Zimmer_3_F.tiles/preview.jpg" />
 		<image>
 			<cube url="panos/DG/DG_Zimmer_3_F.tiles/pano_%s.jpg" />
 		</image>
-        <action name="updateradar">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Zimmer_3_F); set(layer[radar].heading, 00.00 );
             set(Layer[DG_Scene_Name].html,Zimmer 3);
         </action>
@@ -1399,8 +1432,9 @@
                  ath="126"
                  atv="12"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur - Bad - Zimmer 3,Label) ;"
                  
-                 onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1));">
+                 onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <style name="phe_newpoly"
                fillcolor="0x9fa2f4"
@@ -1435,14 +1469,14 @@
     <!-- DG SCENE FURNISH scene_DG_Bad_F -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_Bad_F" title="DG_Bad_F" state = "2" onstart="updateradar();" thumburl="panos/DG/DG_Bad_F.tiles/thumb.jpg" lat="" lng="" heading="">
+    <scene name="scene_DG_Bad_F" title="DG_Bad_F" state="2" onstart="updateradar();" thumburl="panos/DG/DG_Bad_F.tiles/thumb.jpg" lat="" lng="" heading="">
 
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
 		<preview url="panos/DG/DG_Bad_F.tiles/preview.jpg" />
 		<image>
 			<cube url="panos/DG/DG_Bad_F.tiles/pano_%s.jpg" />
 		</image>
-         <action name="updateradar">
+         <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_Bad_F); set(layer[radar].heading, 00.00 );
             set(Layer[DG_Scene_Name].html,Bad - Dusche);
         </action>
@@ -1452,8 +1486,9 @@
                  ath="-150"
                  atv="12"
                  url="skin/hotspotmr.png"
-                 
-                 onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1));">
+                 onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
+                
+                 onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
 	</scene>
 
@@ -1461,13 +1496,13 @@
     <!-- DG SCENE FURNISH scene_DG_W_F -->
     <!-- ................................................................................   -->
 
-    <scene name="scene_DG_W_F" title="DG_W_F" state = "2" onstart="updateradar();" thumburl="panos/DG/DG_W_F.tiles/thumb.jpg" lat="" lng="" heading="">
+    <scene name="scene_DG_W_F" title="DG_W_F" state="2" onstart="updateradar();" thumburl="panos/DG/DG_W_F.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0"  fovtype="MFOV" fov="110"  fovmin="90" fovmax="110" limitview="auto" />
 		<preview url="panos/DG/DG_W_F.tiles/preview.jpg" />
 		<image>
 			<cube url="panos/DG/DG_W_F.tiles/pano_%s.jpg" />
 		</image>
-        <action name="updateradar">
+        <action name="updateradar">changeCombo();
             set(layer[activespot].parent, map); set(layer[radar].parent,DG_W_F); set(layer[radar].heading, 00.00 );
             set(Layer[DG_Scene_Name].html,WC);
         </action>
@@ -1475,6 +1510,7 @@
                  ath="-159"
                  atv="32"
                  url="skin/hotspotm.png"
+                 onhover="showtext(Flur-Eingang ,Label) ;"
                  
                  onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1));">
         </hotspot>
@@ -1498,7 +1534,7 @@
     <!--  action for loading the scene when clicking on the map spots -->
     <!-- ................................................................................   -->
 
-<action name="loadscene">
+<action name="mapspot_loadscene">
         if(layer[map].scale GT 0.75,
 
         <!-- special mode for zoomed map: hide big map, loadscene, show small map -->
@@ -1525,14 +1561,14 @@
            x="715"
            y="570"
            zorder="1"
-           onclick="loadscene(scene_DG_Zimmer_3,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_3);"
            />
     <layer name="DG_Zimmer_2"
            style="mapspot"
            x="500"
            y="300"
            zorder="1"
-           onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_2);"
            />
     <layer name="DG_Zimmer_2_1"
            style="mapspot"
@@ -1540,42 +1576,42 @@
            x="700"
            y="320"
            zorder="1"
-           onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_2_1);"
            />
     <layer name="DG_Zimmer_1"
            style="mapspot"
            x="230"
            y="300"
            zorder="1"
-           onclick="loadscene(scene_DG_Zimmer_1,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_1);"
            />
     <layer name="DG_Flur"
            style="mapspot"
            x="300"
            y="450"
            zorder="1"
-           onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Flur);"
            />
      <layer name="DG_Flur_2"
            style="mapspot"
            x="540"
            y="510"
            zorder="1"
-           onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Flur_2);"
            />
     <layer name="DG_W"
            style="mapspot"
            x="315"
            y="640"
            zorder="1"
-           onclick="loadscene(scene_DG_W,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_W);"
            />
     <layer name="DG_Bad"
            style="mapspot"
            x="480"
            y="630"
            zorder="1"
-           onclick="loadscene(scene_DG_Bad,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Bad);"
            />
 
     <!-- ................................................................................   -->
@@ -1595,14 +1631,14 @@
            x="715"
            y="570"
            zorder="2"
-           onclick="loadscene(scene_DG_Zimmer_3_D,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_3_D);"
            />
     <layer name="DG_Zimmer_2_D"
            style="mapspot_D"
            x="500"
            y="300"
            zorder="2"
-           onclick="loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_2_D);"
            />
     <layer name="DG_Zimmer_2_1_D"
            style="mapspot_D"
@@ -1610,42 +1646,42 @@
            x="700"
            y="320"
            zorder="2"
-           onclick="loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_2_1_D);"
            />
     <layer name="DG_Zimmer_1_D"
            style="mapspot_D"
            x="230"
            y="300"
            zorder="2"
-           onclick="loadscene(scene_DG_Zimmer_1_D,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_1_D);"
            />
     <layer name="DG_Flur_D"
            style="mapspot_D"
            x="300"
            y="450"
            zorder="2"
-           onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Flur_D);"
            />
     <layer name="DG_Flur_2_D"
            style="mapspot_D"
            x="540"
            y="510"
            zorder="1"
-           onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Flur_2_D);"
            />
     <layer name="DG_W_D"
            style="mapspot_D"
            x="315"
            y="640"
            zorder="2"
-           onclick="loadscene(scene_DG_W_D,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_W_D);"
            />
     <layer name="DG_Bad_D"
            style="mapspot_D"
            x="480"
            y="630"
            zorder="2"
-           onclick="loadscene(scene_DG_Bad_D,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Bad_D);"
            />
 
     <!-- ................................................................................   -->
@@ -1658,22 +1694,21 @@
            parent="map"
            align="lefttop"
            edge="center"
-           scale.mobile="2"
-           scale="1.5"
+           scale="2.0"
            />
      <layer name="DG_Zimmer_3_F"
            style="mapspot_F"
            x="715"
            y="570"
            zorder="3"
-           onclick="loadscene(scene_DG_Zimmer_3_F,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_3_F);"
            />
     <layer name="DG_Zimmer_2_F"
            style="mapspot_F"
            x="500"
            y="300"
            zorder="3"
-           onclick="loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_2_F);"
            />
     <layer name="DG_Zimmer_2_1_F"
            style="mapspot_F"
@@ -1681,42 +1716,42 @@
            x="700"
            y="320"
            zorder="3"
-           onclick="loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_2_1_F);"
            />
     <layer name="DG_Zimmer_1_F"
            style="mapspot_F"
            x="230"
            y="300"
            zorder="3"
-           onclick="loadscene(scene_DG_Zimmer_1_F,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Zimmer_1_F);"
            />
     <layer name="DG_Flur_F"
            style="mapspot_F"
            x="300"
            y="450"
            zorder="3"
-           onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Flur_F);"
            />
      <layer name="DG_Flur_2_F"
            style="mapspot_F"
            x="540"
            y="510"
            zorder="3"
-           onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Flur_2_F);"
            />
     <layer name="DG_W_F"
            style="mapspot_F"
            x="315"
            y="640"
            zorder="3"
-           onclick="loadscene(scene_DG_W_F,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_W_F);"
            />
     <layer name="DG_Bad_F"
            style="mapspot_F"
            x="480"
            y="630"
            zorder="3"
-           onclick="loadscene(scene_DG_Bad_F,null,MERGE,BLEND(1));"
+           onclick="mapspot_loadscene(scene_DG_Bad_F);"
            />
 
 
@@ -1729,7 +1764,7 @@
 
 
 
-    <!-- ................................................................................   -->
+ <!-- ................................................................................   -->
     <!--  radar layer (overlays the normal spot too, but is behind the activespot image)-->
     <!-- ................................................................................   -->
 
@@ -1740,7 +1775,7 @@
            align="center"
            zorder="1"
            heading="0"
-           headingoffset="100"
+           headingoffset="150"
            scale="1.0"
            fillalpha="0.5"
            fillcolor="0xffffff"
@@ -1748,6 +1783,7 @@
            linecolor="0xa0c6e2"
            linealpha="0.7"
            />
+
 
 <action name="g_empty_scene">
 
@@ -1895,60 +1931,6 @@
         set(layer[DG_Flur_2].visible,true);
         set(layer[DG_W_C].visible,true);
         set(layer[DG_Bad].visible,true);
-
-
-</action>
-
-
-<action name="dg_dim">
-	
-    layer[cb1].removeAll();
-    layer[cb1].addNamedItem('dg_1_e', '',   );
-    layer[cb1].addNamedItem('dg_2_e', 'Eingang', loadscene(scene_DG_Flur_D,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_3_e', 'Flur', loadscene(scene_DG_Flur_2_D,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_4_e', 'Küche', loadscene(scene_DG_Zimmer_2_D,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_5_e', 'Zimmer 1', loadscene(scene_DG_Zimmer_1_D,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_6_e', 'Zimmer 2', loadscene(scene_DG_Zimmer_2_1_D,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_7_e', 'Zimmer 3', loadscene(scene_DG_Zimmer_3_D,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_8_e', 'Bad - Dusche', loadscene(scene_DG_Bad_D,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_9_e', 'WC', loadscene(scene_DG_W_D,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_10_e', '',    );
-    set(layer[combo_og].visible,false);
-    set(layer[combo_dg].visible,true);
-   
-  
-
-   set(layer[dg_info].visible,true);
-   set(layer[og].visible,false);
-
-
-</action>
-
-
-
-<action name="dg_mob">
-
-    layer[cb1].removeAll();
-    layer[cb1].addNamedItem('dg_1_m', '',   );
-    layer[cb1].addNamedItem('dg_2_m', 'Eingang', loadscene(scene_DG_Flur_F,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_3_m', 'Flur', loadscene(scene_DG_Flur_2_F,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_4_m', 'Küche', loadscene(scene_DG_Zimmer_2_F,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_5_m', 'Zimmer 1', loadscene(scene_DG_Zimmer_1_F,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_6_m', 'Zimmer 2', loadscene(scene_DG_Zimmer_2_1_F,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_7_m', 'Zimmer 3', loadscene(scene_DG_Zimmer_3_F,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_8_m', 'Bad', loadscene(scene_DG_Bad_F,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_9_m', 'WC', loadscene(scene_DG_W_F,null,MERGE|KEEPVIEW,BLEND(0.5))   );
-    layer[cb1].addNamedItem('dg_10_m', '',    );
-
-    set(layer[combo_og].visible,false); 
-    set(layer[combo_dg].visible,true);
-   
-
-
-    <!-- set(layer[west].visible,false); -->
-
-    set(layer[dg_info].visible,true);  -->
-    set(layer[og].visible,false); -->
 
 
 </action>
