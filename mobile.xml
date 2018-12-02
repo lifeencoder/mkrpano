@@ -30,8 +30,8 @@
 <!-- startup action - load the first scene -->
 <action name="startup" autorun="preinit" devices="mobile" >
        <!-- showlog(true,top); -->
-    slide_box_left();  
-    slide_box1_left();  
+    slide_box_left();
+    slide_box1_left();
     mul(stagescale,1.0);
     Hide_Furnish_hotspot();
     Hide_Dim_hotspot();
@@ -43,7 +43,7 @@
 <layer name="cm" url="skin/menu.png" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="10" rotate="0" state="0" onclick="togglecirclemenu();" />
 <layer name="m1" url="skin/plane.png" html="M1" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true"  zorder="9" alpha="0" onclick="togglecirclemenu(close);slide_box1_right();"  onhover ="set(Layer[Menu_mouseOver].html,Realtime );" onout="set(Layer[Menu_mouseOver].html,);"/>
 <!-- <layer name="m2" url="skin/gyro.png" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu(close);makescreenshot();" onhover ="set(Layer[Menu_mouseOver].html,Screen Shot);" onout="set(Layer[Menu_mouseOver].html,);" /> -->
-<layer name="m2" url="skin/gyro.png" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="switch(plugin[skin_gyro].enabled);" onhover ="set(Layer[Menu_mouseOver].html,Screen Shot);" onout="set(Layer[Menu_mouseOver].html,);" />
+<layer name="m2" url="skin/gyro.png" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="switch(plugin[skin_gyro].enabled);togglecirclemenu();gyroCall();" onhover ="set(Layer[Menu_mouseOver].html,Screen Shot);" onout="set(Layer[Menu_mouseOver].html,);" />
 <layer name="m3" url="skin/vrv.png" html="M3" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu(close);webvr.enterVR();" onhover ="set(Layer[Menu_mouseOver].html,VR Mode);" onout="set(Layer[Menu_mouseOver].html,);" />
 <layer name="m4" url="skin/infor.png" html="M4" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu(close);slide_project_info_left();" onhover="set(Layer[Menu_mouseOver].html,Information);" onout="set(Layer[Menu_mouseOver].html,);" />
 <layer name="m5" url="skin/home.png" html="M5" css="text-align:center;" width="35" height="35" align="rightbottom" edge="center" x="40" y="40" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="0" onclick="togglecirclemenu(close);" onhover ="set(Layer[Menu_mouseOver].html,Home" onout="set(Layer[Menu_mouseOver].html,);" />
@@ -60,27 +60,63 @@
 <layer name="q1" type="text" html="WC" css="text-align:center;font-family:Aller;" width="120" height="25" align="rightbottom" edge="center" x="40" y="-12" vcenter="true" bgroundedge="20" keep="true" zorder="9" alpha="1" onclick="togglecirclemenu2(close);floor_w();" />
 <layer name="qg" type="container" align="lefttop" width="100%" height="100%" bgcapture="true" handcursor="false" bgcolor="0x00000" bgalpha="0.5" zorder="8" autoalpha="true" alpha="1.0" onclick="togglecirclemenu2(close);" />
 
-   <!-- <layer name="Tour_G_Leer"
-           type="text"
-           parent="tour_gallery"
-           css="font-family:Aller_Rg;
-                font-size:12px ;
-                color:0xffffff ; "
-           bold="false"
+   <layer name="gyro_botton"
+           type="image"
+           url="skin/gyro.png"
+           state="0"
+           align="righttop"
+           scale="0.018"
+           x="10"
+           y="50"
+           alpha="0"
+           css="font-family:Aller_Rg;"
            background="false"
            html= "Leer"
-           align="leftbottom"
-           x="65"
-           y="120"
-           keep="true"  /> -->
+           enable="true"
+           visible="true"
+           keep="true"
+          onclick="gyro_hide();"
+   />
 
 
-<action name="togglecirclemenu" scope="local" args="setstate">
-     
+
+   <layer name="gyro_text"
+           type="text"
+           align="righttop"
+           scale="0.02"
+           x="37"
+           y="85"
+           css="font-family:Aller;
+                color:0xffffff ; "
+           background="false"
+           html= "OFF"
+           enable="true"
+           alpha="0"
+           visible="true"
+           keep="true"  />
+
+<action name ="gyroCall" >
+    callwith(layer[gyro_botton], tween(x|y|alpha,  10|50|1, 0.5,default, ) );
+    callwith(layer[gyro_text], tween(x|y|alpha,  37|85|1, 0.5,default, ) );
+    switch(plugin[skin_gyro].enabled);
+</action>
+<action name ="gyro_hide">
+    callwith(layer[gyro_botton], tween(x|y|alpha,  10|50|0, 0.5,default, ) );
+    callwith(layer[gyro_text], tween(x|y|alpha,  37|85|0, 0.5,default, ) );
+    switch(plugin[skin_gyro].disabled);
+</action>
+
+
+    <action name="togglecirclemenu" scope="local" args="setstate">
+
     if(layer[cm].state == 0 OR setstate == 'open',
 
         set(Layer[Menu_mouseOver].html,);
         set(layer[cm].state,1);
+
+
+
+
         callwith(layer[cm], tween(rotate, +45));
         callwith(layer[m1], tween(x|y|alpha,  40|172|1, 0.5,default, tween(rotate,360,0.2,default,set(rotate,0)) ) );
         callwith(layer[m2], tween(x|y|alpha,  92|165|1, 0.5,default, tween(rotate,360,0.2,default,set(rotate,0)) ) );
@@ -89,6 +125,7 @@
         callwith(layer[m5], tween(x|y|alpha,  172|40|1, 0.5,default, tween(rotate,360,0.2,default,set(rotate,0)) ) );
         callwith(layer[bg], set(enabled,true); tween(alpha,1); );
         skin_hideskin() ;
+
     , layer[cm].state == 1 OR setstate == 'close',
         set(Layer[Menu_mouseOver].html,);
         set(layer[cm].state,0);
@@ -99,9 +136,9 @@
         callwith(layer[m4], tween(x|y|alpha|rotate, 40|40|0|0));
         callwith(layer[m5], tween(x|y|alpha|rotate, 40|40|0|0));
         callwith(layer[bg], set(enabled,false); tween(alpha,0); );
-        skin_showskin(); 
+        skin_showskin();
     );
- 
+
 </action>
 
 <action name="togglecirclemenu2" scope="local" args="setstate">
@@ -128,7 +165,7 @@
         callwith(layer[q8], tween(x|y|alpha|rotate, 40|-12|0|0));
         callwith(layer[qg], set(enabled,false); tween(alpha,0); );
     );
- 
+
 </action>
 
 
@@ -136,9 +173,9 @@
 
 	if (scene[get(xml.scene)].state == "0", loadscene(scene_DG_flur,null,MERGE,BLEND(1.0)));
 	if (scene[get(xml.scene)].state == "1", loadscene(scene_DG_flur_D,null,MERGE,BLEND(1.0)));
-	if (scene[get(xml.scene)].state == "2", loadscene(scene_DG_flur_F,null,MERGE,BLEND(1.0)));	
+	if (scene[get(xml.scene)].state == "2", loadscene(scene_DG_flur_F,null,MERGE,BLEND(1.0)));
 
-</action>  
+</action>
 
 
 <action name="floor_f_2" scope="local" >
@@ -146,8 +183,8 @@
   	if (scene[get(xml.scene)].state == "0", loadscene(scene_DG_flur_2,null,MERGE,BLEND(1.0)));
 	if (scene[get(xml.scene)].state == "1", loadscene(scene_DG_flur_2_D,null,MERGE,BLEND(1.0)));
 	if (scene[get(xml.scene)].state == "2", loadscene(scene_DG_flur_2_F,null,MERGE,BLEND(1.0)));
-	
-</action>  
+
+</action>
 
 
 
@@ -157,7 +194,7 @@
 	if (scene[get(xml.scene)].state == "1", loadscene(scene_DG_Zimmer_1_D,null,MERGE,BLEND(1.0)));
 	if (scene[get(xml.scene)].state == "2", loadscene(scene_DG_Zimmer_1_F,null,MERGE,BLEND(1.0)));
 
-</action>  
+</action>
 
 <action name="floor_z_2" scope="local" >
 
@@ -165,7 +202,7 @@
 	if (scene[get(xml.scene)].state == "1", loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1.0)));
 	if (scene[get(xml.scene)].state == "2", loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1.0)));
 
-</action>  
+</action>
 
 
 <action name="floor_z_2_1" scope="local" >
@@ -174,7 +211,7 @@
 	if (scene[get(xml.scene)].state == "1", loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1.0)));
 	if (scene[get(xml.scene)].state == "2", loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1.0)));
 
-</action>  
+</action>
 
 
 <action name="floor_z_3" scope="local" >
@@ -183,7 +220,7 @@
 	if (scene[get(xml.scene)].state == "1", loadscene(scene_DG_Zimmer_3_D,null,MERGE,BLEND(1.0)));
 	if (scene[get(xml.scene)].state == "2", loadscene(scene_DG_Zimmer_3_F,null,MERGE,BLEND(1.0)));
 
-</action>  
+</action>
 
 
 <action name="floor_b" scope="local" >
@@ -192,7 +229,7 @@
 	if (scene[get(xml.scene)].state == "1", loadscene(scene_DG_Bad_D,null,MERGE,BLEND(1.0)));
 	if (scene[get(xml.scene)].state == "2", loadscene(scene_DG_Bad_F,null,MERGE,BLEND(1.0)));
 
-</action>  
+</action>
 
 <action name="floor_w" scope="local" >
 
@@ -200,7 +237,7 @@
 	if (scene[get(xml.scene)].state == "1", loadscene(scene_DG_W_D,null,MERGE,BLEND(1.0)));
 	if (scene[get(xml.scene)].state == "2", loadscene(scene_DG_W_F,null,MERGE,BLEND(1.0)));
 
-</action> 
+</action>
 
 <layer name="Menu_mouseOver"
            type="text"
@@ -211,7 +248,7 @@
            y="28"
            keep="true"
            handcursor="false"
-             />  
+             />
 <!--    <autorotate enabled="true" waittime="0.0"  speed="3" horizon="0" tofov="95" />-->
 
 
@@ -263,11 +300,11 @@
            fontsize.mobile="30"
            bold="false"
            background="false"
-         
+
            backgroundalpha="0.667"
            border="false"
            borderwidth="2"
-           
+
            roundedge="5"
            textcolor="#ffffff"
            padding="6 10"
@@ -277,7 +314,7 @@
            yoffset.touch="-20"
            css="color:#ffffff;font-family:Aller;"
            handcursor="false"
-               />               
+               />
      <style name="gg"
             css="color:#ffffff;font-family:Aller;"
             oversampling="8.0"
@@ -366,7 +403,7 @@
            bgcapture="true"
            maskchildren="true"
            handcursor="false"
-           
+
            />
 <!-- DG Map Layer -->
  <layer name="map"
@@ -415,7 +452,7 @@
            type="container"
            keep="true"
            alpha="1"
-           align="righttop"
+           align="rightcenter"
            x="-255"
            y="0"
            width="284"
@@ -428,15 +465,15 @@
            />
 
 
-<!-- <<< Main Combo Box Layer >>>================================================================================ -->           
+<!-- <<< Main Combo Box Layer >>>================================================================================ -->
 
 
 
-<!-- <<< OG Floor Combo Box >>>================================================================================ -->           
+<!-- <<< OG Floor Combo Box >>>================================================================================ -->
 
 
 
-<!-- <<< DG Floor Combo Box >>>================================================================================ -->    
+<!-- <<< DG Floor Combo Box >>>================================================================================ -->
 
 
 <!-- <<< OG Floor Info Box >>>================================================================================ -->
@@ -469,11 +506,11 @@
            onclick="slide_project_info_right();"
            />
 
-<!-- <<< Right Top Menu Information Label >>>================================================================================ -->    
+<!-- <<< Right Top Menu Information Label >>>================================================================================ -->
 
 
 
-<!-- <<< Right Top Menu Grundriss Label >>>================================================================================ -->              
+<!-- <<< Right Top Menu Grundriss Label >>>================================================================================ -->
 
     <!-- <plugin name="menu"
             url="gui_menu/btn_menu_g.png"
@@ -496,7 +533,7 @@
             onclick="slide_box_left();"
             /> -->
 
-<!-- <<< Right Top OG Menu Grundriss Label >>>================================================================================ --> 
+<!-- <<< Right Top OG Menu Grundriss Label >>>================================================================================ -->
 
     <plugin name="og-gru"
             url="gui_menu/btn_menu_g.png"
@@ -566,7 +603,7 @@
            set(layer[og-gru].visible,false);
            set(layer[og_info].visible,false);
            set(layer[dg_info].visible,true);
-           
+
 
            loadscene(scene_DG_Flur,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));
   </action>
@@ -610,7 +647,7 @@
                  atv="4"
                  url="skin/hotspotm.png"
                  onhover="showtext( Zimmer 2 , Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur to DG Zimmer 2 Küche "
@@ -618,7 +655,7 @@
                  atv="15"
                  url="skin/hotspotml.png"
                  onhover="showtext( Küche - Zimmer 2 , Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="DG_Flur to flur 2"
@@ -626,7 +663,7 @@
                  atv="5"
                  url="skin/hotspotmr.png"
                  onhover="showtext( Flur - Bad - Zimmer 3 ,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur to Zimmer_1"
@@ -634,7 +671,7 @@
                  atv="4.91"
                  url="skin/hotspotm.png"
                  onhover="showtext( Zimmer_1,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_1,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -643,7 +680,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext( WC ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_W,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -668,7 +705,7 @@
                  atv="5"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Eingang,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));">
         </hotspot>
     <hotspot name="Flur  to "
@@ -676,7 +713,7 @@
                  atv="22"
                  url="skin/hotspotmr.png"
                  onhover="showtext(Zimmer 2,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur 2 to Bad"
@@ -684,7 +721,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Bad - Dusche,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Bad,null,MERGE,BLEND(1));">
         </hotspot>
     <hotspot name="Flur 2 to Zimmer 2 Küche"
@@ -692,7 +729,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Küche - Zimmer 2,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1));">
         </hotspot>
  <hotspot name="Flur 2 to Zimmer 3"
@@ -700,7 +737,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_3,null,MERGE,BLEND(1));">
         </hotspot>
 
@@ -725,7 +762,7 @@
                  atv="8"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Bad - Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur "
@@ -733,7 +770,7 @@
                  atv="11"
                  url="skin/hotspotmr.png"
                  onhover="showtext( Flur - Eingang ,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1))lookto(0, 0, 0, smooth(0,0,0))adjusthlookat(30,30);">
         </hotspot>
         <hotspot name="DG Zimmer 2"
@@ -741,7 +778,7 @@
                  atv="18"
                  url="skin/hotspotm.png"
                  onhover="showtext( Zimmer 2,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_1,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
     </scene>
@@ -765,7 +802,7 @@
                  atv="6"
                  url="skin/hotspotm.png"
                  onhover="showtext( Flur - Eingang ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -774,7 +811,7 @@
                  atv="6"
                  url="skin/hotspotml.png"
                  onhover="showtext( Flur - Bad - Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -783,7 +820,7 @@
                  atv="8"
                  url="skin/hotspotm.png"
                  onhover="showtext( Küche - Zimmer 2 ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -807,7 +844,7 @@
                  atv="12"
                  url="skin/hotspotmr.png"
                  onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1));">
         </hotspot>
     </scene>
@@ -831,7 +868,7 @@
                  atv="32"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur-Eingang ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));">
         </hotspot>
     </scene>
@@ -855,7 +892,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Eingang,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1));">
 
         </hotspot>
@@ -880,7 +917,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_2,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
     </scene>
@@ -903,7 +940,7 @@
                  atv="4"
                  url="skin/hotspotm.png"
                  onhover="showtext( Zimmer 2 , Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur to DG Zimmer 2 Küche "
@@ -911,7 +948,7 @@
                  atv="15"
                  url="skin/hotspotml.png"
                  onhover="showtext( Küche - Zimmer 2 , Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="DG_Flur to flur 2"
@@ -919,7 +956,7 @@
                  atv="5"
                  url="skin/hotspotmr.png"
                  onhover="showtext( Flur - Bad - Zimmer 3 ,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur to Zimmer_1"
@@ -927,7 +964,7 @@
                  atv="4.91"
                  url="skin/hotspotm.png"
                  onhover="showtext( Zimmer_1,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_1_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -936,7 +973,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext( WC ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_W_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -960,7 +997,7 @@
                  atv="5"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Eingang,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1));">
         </hotspot>
     <hotspot name="Flur  to "
@@ -968,7 +1005,7 @@
                  atv="22"
                  url="skin/hotspotmr.png"
                  onhover="showtext(Zimmer 2,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur 2 to Bad"
@@ -976,7 +1013,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Bad - Dusche,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Bad_D,null,MERGE,BLEND(1));">
         </hotspot>
     <hotspot name="Flur 2 to Zimmer 2 Küche"
@@ -984,7 +1021,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Küche - Zimmer 2,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1));">
         </hotspot>
  <hotspot name="Flur 2 to Zimmer 3"
@@ -992,7 +1029,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_3_D,null,MERGE,BLEND(1));">
         </hotspot>
     </scene>
@@ -1015,7 +1052,7 @@
                  atv="8"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Bad - Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
 
         </hotspot>
@@ -1024,7 +1061,7 @@
                  atv="11"
                  url="skin/hotspotmr.png"
                  onhover="showtext( Flur - Eingang ,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1))lookto(0, 0, 0, smooth(0,0,0))adjusthlookat(30,30);">
         </hotspot>
         <hotspot name="DG Zimmer 2"
@@ -1032,7 +1069,7 @@
                  atv="18"
                  url="skin/hotspotm.png"
                  onhover="showtext( Zimmer 2,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_1_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
     </scene>
@@ -1056,7 +1093,7 @@
                  atv="6"
                  url="skin/hotspotm.png"
                  onhover="showtext( Flur - Eingang ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -1066,7 +1103,7 @@
                  atv="6"
                  url="skin/hotspotml.png"
                  onhover="showtext( Flur - Bad - Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -1075,7 +1112,7 @@
                  atv="8"
                  url="skin/hotspotm.png"
                  onhover="showtext( Küche - Zimmer 2 ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -1099,7 +1136,7 @@
                  atv="12"
                  url="skin/hotspotmr.png"
                  onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1));">
         </hotspot>
 
@@ -1124,7 +1161,7 @@
                  atv="32"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur-Eingang ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1));">
 
         </hotspot>
@@ -1149,7 +1186,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Eingang,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_D,null,MERGE,BLEND(1));">
 
         </hotspot>
@@ -1174,7 +1211,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_2_D,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
     </scene>
@@ -1204,7 +1241,7 @@
                  atv="4"
                  url="skin/hotspotm.png"
                  onhover="showtext( Zimmer 2 , Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur to DG Zimmer 2 Küche "
@@ -1212,7 +1249,7 @@
                  atv="15"
                  url="skin/hotspotml.png"
                  onhover="showtext( Küche - Zimmer 2 , Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="DG_Flur to flur 2"
@@ -1220,7 +1257,7 @@
                  atv="5"
                  url="skin/hotspotmr.png"
                  onhover="showtext( Flur - Bad - Zimmer 3 ,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur to Zimmer_1"
@@ -1228,7 +1265,7 @@
                  atv="4.91"
                  url="skin/hotspotm.png"
                  onhover="showtext( Zimmer_1,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_1_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -1237,7 +1274,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext( WC ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_W_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -1262,7 +1299,7 @@
                  atv="5"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Eingang,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1));">
         </hotspot>
     <hotspot name="Flur  to "
@@ -1270,7 +1307,7 @@
                  atv="22"
                  url="skin/hotspotmr.png"
                  onhover="showtext(Zimmer 2,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1));">
         </hotspot>
         <hotspot name="Flur 2 to Bad-Dusche"
@@ -1278,7 +1315,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Bad - Dusche,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Bad_F,null,MERGE,BLEND(1));">
         </hotspot>
     <hotspot name="Flur 2 to Zimmer 2 Küche"
@@ -1286,7 +1323,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Küche - Zimmer 2,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1));">
         </hotspot>
  <hotspot name="Flur 2 to Zimmer 3"
@@ -1294,7 +1331,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_3_F,null,MERGE,BLEND(1));">
         </hotspot>
 	</scene>
@@ -1327,7 +1364,7 @@
                  atv="6"
                  url="skin/hotspotm.png"
                  onhover="showtext( Flur - Eingang ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -1336,7 +1373,7 @@
                  atv="6"
                  url="skin/hotspotml.png"
                  onhover="showtext( Flur - Bad - Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -1345,7 +1382,7 @@
                  atv="8"
                  url="skin/hotspotm.png"
                  onhover="showtext( Küche - Zimmer 2 ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));"
                  >
         </hotspot>
@@ -1370,7 +1407,7 @@
                  atv="8"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Bad - Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="Flur "
@@ -1378,7 +1415,7 @@
                  atv="11"
                  url="skin/hotspotmr.png"
                  onhover="showtext( Flur - Eingang ,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Flur,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <hotspot name="DG Zimmer 2"
@@ -1386,7 +1423,7 @@
                  atv="18"
                  url="skin/hotspotm.png"
                  onhover="showtext( Zimmer 2,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Zimmer_2_1_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
 	</scene>
@@ -1410,7 +1447,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Eingang,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1));">
         </hotspot>
 	</scene>
@@ -1434,7 +1471,7 @@
                  atv="12"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur - Bad - Zimmer 3,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
         <style name="phe_newpoly"
@@ -1488,7 +1525,7 @@
                  atv="12"
                  url="skin/hotspotmr.png"
                  onhover="showtext(Flur - Bad - Zimmer 3 ,Label) ;"
-                
+
                  onclick="loadscene(scene_DG_Flur_2_F,null,MERGE,BLEND(1))lookto(0, 0, 85, smooth(100,100,200));">
         </hotspot>
 	</scene>
@@ -1512,7 +1549,7 @@
                  atv="32"
                  url="skin/hotspotm.png"
                  onhover="showtext(Flur-Eingang ,Label) ;"
-                 
+
                  onclick="loadscene(scene_DG_Flur_F,null,MERGE,BLEND(1));">
         </hotspot>
 	</scene>
@@ -1794,7 +1831,7 @@
         Hide_Dim_hotspot();
         Hide_Furnish_hotspot();
         Show_Empty_hotspot();
-        
+
 
 
 
