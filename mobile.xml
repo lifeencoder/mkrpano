@@ -98,7 +98,7 @@
 <action name ="gyroCall" >
     callwith(layer[gyro_botton], tween(x|y|alpha,  10|50|1, 0.5,default, ) );
     callwith(layer[gyro_text], tween(x|y|alpha,  37|85|1, 0.5,default, ) );
-    switch(plugin[skin_gyro].enabled);
+    <!-- switch(plugin[skin_gyro].enabled); -->
 </action>
 <action name ="gyro_hide">
     callwith(layer[gyro_botton], tween(x|y|alpha,  10|50|0, 0.5,default, ) );
