@@ -209,7 +209,7 @@
 <!-- DG Map Layer -->
  <layer name="map"
            parent="box1"
-           url="skin/inmap.png"
+           url="skin/desk_map.png"
            keep="true"
 
            handcursor="false"
