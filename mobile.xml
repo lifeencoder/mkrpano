@@ -400,7 +400,7 @@
            y=""
            width="520"
            height="394"
-           bgcapture="true"
+           bgcapture="false"
            maskchildren="true"
            handcursor="false"
 
@@ -491,10 +491,10 @@
            html="[/br]  OBJEKT :              3D-Beispielbegehung        [/br] [/br]  TYP :                      Dachgeschosswohnung[/br]
                  [/br]  ETAGE :                 Dachgeschoss[/br]  [/br]  RÄUME :                3[/br][/br]  WOHNFLÄCHE :    ca. 84,85 m²[/br][/br] 
                              KONTAKT :             +49(69)87004000[/br] [/br]                                  info@3-visions.com[/br][/br]"
-           css="color:#ffffff;"
+           css="color:#000000;"
            vcenter="false"
            wordwrap="true"
-           bg="true"
+           bg="false"
            color="#ffffff"
            bgcolor="0x7fa1ab"
            bgalpha="0.8"
